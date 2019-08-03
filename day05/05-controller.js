@@ -7,6 +7,9 @@ function getIndex(req,res){
 function getEdit(req,res){
     res.render('edit');
 }
+function getAdd(req,res){
+    res.render('add');
+}
 function getHeroById(req,res){
     let id=req.query.id;
     model.getHeroById(id,target=>{
@@ -22,6 +25,23 @@ function getHeroById(req,res){
         res.send(response);
     })
 }
+function addNewHero(req,res){
+    model.addNewHero(req.body,result=>{
+        console.log(1)
+        let response={
+            code:501,
+            msg:'失败'
+        }
+        if(result.affectedRows===1){
+            response.code=200;
+            response.msg='成功'
+        }
+        res.send(response)
+    })
+
+}
+
+
 function editHeroById(req,res){
     let data=req.body;
     model.getAllHero(arr=>{
@@ -36,7 +56,24 @@ function editHeroById(req,res){
         res.send({code:200,msg:'成功'})
     })
 }
+function deleteHeroById(req,res){
+    let id=req.query.id;
+    model.deleteHeroById(id,result=>{
+        let response={
+            code:501,
+            msg:'失败'
+        };
+        if(result.affectedRows===1){
+            response.code=200;
+            response.msg='成功'
+        }
+        res.send(response)
+    })
+}
 const controller={
-    getIndex,getEdit,getHeroById,editHeroById
+    getIndex,getEdit,getHeroById,editHeroById,getAdd,addNewHero
 }
 module.exports=controller
+
+
+
