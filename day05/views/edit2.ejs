@@ -19,20 +19,25 @@
     </header>
     <div class="container hero-list">
         <form id="form">
-            <input type="hidden" id="id" name='id' value="1">
-            <input type="hidden" name="img" id="headSrc" value="">
+            <input type="hidden" id="id" name='id' value="<%=id%>">
+            <input type="hidden" name="img" id="headSrc" value="<%=img%>">
             <table class="table table-hover">
                 <tbody>
                     <tr>
                         <td>姓名：</td>
-                        <td><input type="text" id="name" name="name" value=""></td>
+                        <td><input type="text" id="name" name="name" value="<%=name%>"></td>
                     </tr>
                     <tr>
                         <td>性别：</td>
                         <td>
+                        <%if(gender=='男'){%>
                             <input id="nan" name="gender" value="男" type="radio" checked><label for="nan">男</label>
                             <input name="gender" value="女" type="radio" id="nv"><label for="nv">女</label>
                         </td>
+                        <%}else{%>
+                          <input id="nan" name="gender" value="男" type="radio" ><label for="nan">男</label>
+                            <input name="gender" value="女" type="radio" id="nv" checked><label for="nv">女</label>
+                            <% } %>
                     </tr>
                     <tr>
                         <td>头像：</td>
@@ -50,5 +55,5 @@
 
 </body>
 <script src="../assets/js/jquery.js"></script>
-<script src="../assets/js/edit.js"></script>
+
 </html>

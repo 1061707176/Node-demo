@@ -10,6 +10,13 @@ function getEdit(req,res){
 function getAdd(req,res){
     res.render('add');
 }
+//使用模板引擎动态渲染的修改的页面
+function getEdit2(req,res){
+    let id=req.query.id;
+    model.getHeroById(id,target=>{
+        res.render('edit2',target)
+    })
+}
 function getHeroById(req,res){
     let id=req.query.id;
     model.getHeroById(id,target=>{
@@ -44,17 +51,19 @@ function addNewHero(req,res){
 
 function editHeroById(req,res){
     let data=req.body;
-    model.getAllHero(arr=>{
-        for(let i=0;i<arr.length;i++){
-            if(arr[i].id==data.id){
-                arr[i]=data;
-                 break
-            }
+    model.editHeroById(data.id,data,result=>{
+        let response={
+            code:501,
+            msg:'失败'
+        };
+        if(result.affectedRows===1){
+            response.code=200;
+            response.msg='成功'
         }
-
-        model.writeFile(arr);
-        res.send({code:200,msg:'成功'})
+        res.send(response)
     })
+
+ 
 }
 function deleteHeroById(req,res){
     let id=req.query.id;
@@ -71,7 +80,7 @@ function deleteHeroById(req,res){
     })
 }
 const controller={
-    getIndex,getEdit,getHeroById,editHeroById,getAdd,addNewHero
+    getIndex,getEdit,getHeroById,editHeroById,getAdd,addNewHero,getEdit2,deleteHeroById
 }
 module.exports=controller
 

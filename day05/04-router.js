@@ -20,5 +20,11 @@ router.post('/editHeroById',(req,res)=>{
 router.post('/addNewHero',(req,res)=>{
     controller.addNewHero(req,res);
 })
+router.get('/edit2',(req,res)=>{
+    controller.getEdit2(req,res)
+})
 
+router.get('/deleteHeroById',(req,res)=>{
+    controller.deleteHeroById(req,res)
+})
 module.exports=router
